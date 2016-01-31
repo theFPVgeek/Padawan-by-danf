@@ -1,0 +1,17 @@
+ 0
+ 1 MP3 trigger RX
+ 2 Sound module 2 Busy
+ 3 Syren S1
+ 4 Sabertooth S1
+ 5 Dome signal wire RX
+ 6 Sound module 2 Clock
+ 7
+ 8 No connection- used as Software Serial Rx
+ 9 Sound module 2 Dat
+10 PS2 Atten.
+11 PS2 Cmd.
+12 PS2 Dat.
+13 PS2 Clock
+A0 Sound module 1 Busy
+A1 Sound module 1 Clock
+A2 Sound module 1 Dat
