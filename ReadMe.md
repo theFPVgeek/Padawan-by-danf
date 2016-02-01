@@ -1,4 +1,4 @@
-**Padawan Astromech Control System by danf**
+#Padawan Astromech Control System by danf
 
 Revisions-    01/30/16 - danf posted on Astromech new sketch to support WTV020-SD-16P
               08/12/14- Added loop counter to detect controller, helps with some controllers that have trouble connecting.
