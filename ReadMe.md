@@ -1,20 +1,22 @@
 #Padawan Astromech Control System by danf
 
 **Revisions**
-- 01/30/16 - danf posted on Astromech a new sketch to support WTV020-SD-16P (Sketch name: **Padawan_Body_wtv020_WIP5**)
+- 01/30/16 - danf posted on Astromech a new sketch to support WTV020-SD-16P
+**(Padawan_Body_wtv020_WIP5)**
 - 08/12/14- Added loop counter to detect controller, helps with some controllers that have trouble connecting. (Thank you Joymonkey for that)
 - 01/01/14- New Bar Graph display for Cantina song, new Short Circuit display, (thank you Marc for those) visual display for speed change, adjustable logic display brightness, can select flipped bottom logic display, now works correctly with Sparkfun Pro Micro.
 - 12/14/13- Fixed auto hp in T-3 sketch, easier to change hp servo pin numbers.
 - 12/02/13- Corrected a buffer overrun issue(thank you Marc), corrected padawan_control_system.JPG
 - 11/11/13- Added more safety features, Multiple Speed Selection, Heart display for Wolf Whistle
 
-**Update Posted 01/30/16**
+**danf Astromech Update Posted 01/30/16**
 
 Has the sketch (Padawan_Body_wtv020_WIP5), library (WtvPadawan), some pics (support files) and a list of pins (Arduino Pins.txt) used
 Don't try to power the Sound modules with the Arduino, it wont have enough power. Use a separate voltage regulator.
 Some modules and/or sd cards need a little more than 3.3v to work. If you use an adjustable regulator like one of these from eBay you can start at 3.3v and try slightly higher voltages if its not working.
 
 This sketch is also compatible with JoyMonkey's Padawan Universal Shield which has space for 2 modules and a different voltage regulator.
+http://astromech.net/droidwiki/Padawan_Universal_Shield
 
 > **Please Note:** Several of the arduino pins have changed from the original sketch as was necessary to work with JoyMonkey's Padawan Universal Shield. If using this sketch refer to the Arduino pins txt doc to see where to connect the Syren, Sabertooth, and Dome signal to!!
 
