@@ -23,7 +23,7 @@ The shield isn't necessary, but is very cool. Whether you use one or not , use t
 With this sketch you can use 1 or 2 of the cheap modules or a mp3 trigger or one of each. If using 2 R1 and up or down arrows are sound volume and R1 and left and right are music volume. Pressing all 4 triggers (L1,L2,R1,R2) stops all sounds and music. L1 and pressing the left joystick turns on jukebox. It will play songs in a random order. As is, it uses the 4 starwars tunes allready on there but you could add as much music as you want and have it use those.
 If anyone try it let me know how it goes.
 
-**Original danf Notes below (prior to 01/30/16 post)**
+**Original danf ReadMe.txt below (Oct 13, 2014)**
 
 Included are 3 versions of the body code and 2 of the dome.
 
