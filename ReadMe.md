@@ -31,10 +31,10 @@ Included are 3 versions of the body code and 2 of the dome.
 - Uses Serial Connections to A Sabertooth Speed Controller for the feet.
 - SyRen Speed Controller for the dome
 - This will probably be the preferred metheod for most cases.
-- Sabertooth DIP Switches Set- 1 and 2 Down 3,4,5,and 6 Up
-- SyRen DIP Switches Packetized (preferred)- Set- 1 and 2 Down 3,4,5,and 6 Up
-- Simple(see below)-Set- 2 and 4 Down 1,3,5,and 6 Up
-- This has been tested with a Sabertooth 2x25 ver.1 and ver. 2, and a SyRen 10. 
+- Sabertooth DIP Switches Set- 1 and 2 Down 3, 4, 5, and 6 Up
+- SyRen DIP Switches Packetized (preferred)- Set- 1 and 2 Down 3, 4, 5, and 6 Up
+- Simple(see below)-Set- 2 and 4 Down 1, 3, 5,and 6 Up
+- This has been tested with a Sabertooth 2x25 (ver.1 & ver.2) and a SyRen 10. 
 - A Sabertooth 2x25 ver.1  MIGHT need the baud rate changed.
 
 **A1Body_R2_1_4**
@@ -77,12 +77,12 @@ http://www.billporter.info/arduino-playstation-2-controller-library-troubleshoot
 
 **If everything is hooked up properly:**
 
-**Start button** - enable/disable foot motors
-**left joystick** - left/right-dome motor
-**pushbutton** - holo light
-**right joystck** - drive motors
-**d-pad** - if right trigger1 held down- volume controll, else holo movement
-**green, red, blue, pink** - random sounds or hold one of the triggers for specific sounds or songs
+- **Start button** - enable/disable foot motors
+- **left joystick** - left/right-dome motor
+- **pushbutton** - holo light
+- **right joystck** - drive motors
+- **d-pad** - if right trigger1 held down- volume controll, else holo movement
+- **green, red, blue, pink** - random sounds or hold one of the triggers for specific sounds or songs
 
 
 **Materials List:**
