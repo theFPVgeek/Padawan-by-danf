@@ -1,14 +1,12 @@
 #Padawan Astromech Control System by danf
 
-Revisions-    01/30/16 - danf posted on Astromech new sketch to support WTV020-SD-16P
-              08/12/14- Added loop counter to detect controller, helps with some controllers that have trouble connecting.
-                        (Thank you Joymonkey for that)
-              01/01/14- New Bar Graph display for Cantina song, new Short Circuit display, (thank you Marc for those) 
-                        visual display for speed change, adjustable logic display brightness, can select flipped bottom logic display, 
-                        now works correctly with Sparkfun Pro Micro.
-              12/14/13- Fixed auto hp in T-3 sketch, easier to change hp servo pin numbers.
-              12/02/13- Corrected a buffer overrun issue(thank you Marc), corrected padawan_control_system.JPG
-              11/11/13- Added more safety features, Multiple Speed Selection, Heart display for Wolf Whistle
+Revisions
+- 01/30/16 - danf posted on Astromech new sketch to support WTV020-SD-16P
+- 08/12/14- Added loop counter to detect controller, helps with some controllers that have trouble connecting. (Thank you Joymonkey for that)
+- 01/01/14- New Bar Graph display for Cantina song, new Short Circuit display, (thank you Marc for those) visual display for speed change, adjustable logic display brightness, can select flipped bottom logic display, now works correctly with Sparkfun Pro Micro.
+- 12/14/13- Fixed auto hp in T-3 sketch, easier to change hp servo pin numbers.
+- 12/02/13- Corrected a buffer overrun issue(thank you Marc), corrected padawan_control_system.JPG
+- 11/11/13- Added more safety features, Multiple Speed Selection, Heart display for Wolf Whistle
 
 **Update Posted 01/30/16**
 
