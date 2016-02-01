@@ -1,7 +1,7 @@
 #Padawan Astromech Control System by danf
 
 **Revisions**
-- 01/30/16 - danf posted on Astromech new sketch to support WTV020-SD-16P
+- 01/30/16 - danf posted on Astromech a new sketch to support WTV020-SD-16P (Sketch name: **Padawan_Body_wtv020_WIP5**)
 - 08/12/14- Added loop counter to detect controller, helps with some controllers that have trouble connecting. (Thank you Joymonkey for that)
 - 01/01/14- New Bar Graph display for Cantina song, new Short Circuit display, (thank you Marc for those) visual display for speed change, adjustable logic display brightness, can select flipped bottom logic display, now works correctly with Sparkfun Pro Micro.
 - 12/14/13- Fixed auto hp in T-3 sketch, easier to change hp servo pin numbers.
