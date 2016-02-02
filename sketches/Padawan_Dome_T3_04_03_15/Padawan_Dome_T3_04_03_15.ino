@@ -46,7 +46,7 @@
   // 2 = Sparkfun Pro Micro (but be ready to deal with USB and upload issues)
   // 3 = Arduino Micro 
   // 4 = Arduino Nano (my fav of the small boards)
-#define BOARDtype 1
+#define BOARDtype 2
 
 // PSItype sets the type of our front and rear PSI's
   // 1 = Teeces original (6 LEDs of each color, arranged side by side)
@@ -57,7 +57,7 @@
 
 // For flipped bottom logic displays
   // un-comment the following line if your bottom FLD is flipped upside down
-//#define flipBottomFLD
+#define flipBottomFLD
 
 // Set pins used for front hp servos
 #define HPY A4
@@ -76,7 +76,7 @@ char RLDtext[] = "ARTOO DETOO  "; //PUT YOUR REAR STARTUP TEXT HERE.
 
 // set brightness levels here (a value of 0-15)
 byte LDbrightness = 1;   // Logics
-#define PSIbrightness   15  // PSI
+#define PSIbrightness   12  // PSI
 
 // time in ms between logic display updates (lower = blink faster)
 #define LOGICupdateDelay 100
