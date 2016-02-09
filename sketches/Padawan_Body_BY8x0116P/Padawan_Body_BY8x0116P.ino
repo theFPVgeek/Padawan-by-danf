@@ -27,11 +27,11 @@
 
 // Primary Audio Player...
 byte AUDIO1 = 2;  // 1=SparkfunMP3 Trigger
-                  // 2=BY8x01-16P module / BY8x01-16P Module
+                  // 2=BY8x01-16P Module
 // Secondary Audio Player (used for music and background sfx)...
-byte AUDIO2 = 2; // 0=No secondary audio player (music will be played by primary)
+byte AUDIO2 = 0; // 0=No secondary audio player (music will be played by primary)
                   // 1=SparkfunMP3 Trigger
-                  // 2=BY8x01-16P module / BY8x01-16P Module
+                  // 2=BY8x01-16P Module
 				  
 //Start-up Sound Options				  
 //#define SNDSTRT 1 // Sound number to play on startup
