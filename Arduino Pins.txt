@@ -5,8 +5,8 @@
  4 Sabertooth S1
  5 Dome signal wire RX
  6 Sound module 2 Clock
- 7
- 8 No connection- used as Software Serial Rx
+ 7 NO CONNECTION - USED FOR ADK
+ 8 NO CONNECTION - used as Software Serial Rx
  9 Sound module 2 Dat
 10 PS2 Atten.
 11 PS2 Cmd.

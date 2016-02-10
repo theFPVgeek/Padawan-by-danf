@@ -1,9 +1,9 @@
 /*
-// =======================================================================================
+// =========================================================================================
 //                     Padawan Body Code - BY8x01-16P Sound Module Support
 //                              Code Revised by r0n_dL  
-// =======================================================================================
-//                               original author: danf
+// =========================================================================================
+//                               Original Developer: danf
 //                              Revised  Date: 02/09/15
 //   Designed to be used with a second Arduino running the Padawan Dome code
 //              EasyTransfer and PS2X_lib libraries by Bill Porter
@@ -20,61 +20,65 @@
 //         MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 */
-//************************** Set Audio Options here************************************//
 
-// Note: Sketch currently does NOT support 2 SparkfunMP3 Triggers. 
+// =================== SET AUDIO OPTIONS ===================================================
+
+// NOTE: Sketch currently does NOT support 2 SparkfunMP3 Triggers. 
 //       You can use 1 SparkfunMP3 Trigger either with or without a BY8x01-16P module
 
 // Primary Audio Player...
-byte AUDIO1 = 2;  // 1=SparkfunMP3 Trigger
+byte AUDIO1 = 2;  // 1=Sparkfun MP3 Trigger
                   // 2=BY8x01-16P Module
-// Secondary Audio Player (used for music and background sfx)...
+                  
+//Secondary Audio Player (used for music and background sfx)...
 byte AUDIO2 = 0; // 0=No secondary audio player (music will be played by primary)
-                  // 1=SparkfunMP3 Trigger
+                  // 1=Sparkfun MP3 Trigger
                   // 2=BY8x01-16P Module
 				  
 //Start-up Sound Options				  
-//#define SNDSTRT 1 // Sound number to play on startup
-//#define SNDDRIV 2 // Sound number to play when foot drives enabled
-//#define SNDAUTO 3 // Sound number to play when Dome Auto Mode engaged  
+//#define SNDSTRT 1 //Sound number to play on startup
+//#define SNDDRIV 2 //Sound number to play when foot drives enabled
+//#define SNDAUTO 3 //Sound number to play when Dome Auto Mode engaged  
 
 //JukeBox Options                    
-#define jukeBoxLower 9//Lowest number track to play in jukeBox mode
-#define jukeBoxUpper 12//Highest number track to play in jukeBox mode
+#define jukeBoxLower 9 //Lowest number track to play in jukeBox mode
+#define jukeBoxUpper 12 //Highest number track to play in jukeBox mode
 
-//************************** Set speed and turn here************************************//
+
+
+// =================== SET DOME, DRIVE, AND TURN SPEED =====================================
 
 byte drivespeed1 = 100; //set these 3 to whatever speeds work for you. 0-stop, 127-full speed.
-byte drivespeed2 = 127;//Recommend beginner: 50 to 75, experienced: 100 to 127, I like 100.
-byte drivespeed3 = 0;//Set to 0 if you only want 2 speeds.
+byte drivespeed2 = 127; //Recommend beginner: 50 to 75, experienced: 100 to 127, I like 100.
+byte drivespeed3 = 0;   //Set to 0 if you only want 2 speeds.
 
 byte drivespeed = drivespeed1;  
                                               
-byte turnspeed = 70;   // the higher this number the faster it will spin in place, lower - easier to controll. 
-                       // Recommend beginner: 40 to 50, experienced: 50 $ up, I like 75
-                       
-byte domespeed = 127;  // If using a speed controller for the dome, sets the top speed
-                       // Use a number up to 127 for serial
-                       
-byte ramping = 5;      // Ramping- the lower this number the longer R2 will take to speedup or slow down,
-                       // change this by incriments of 1
-                       
-byte domeRamping = 1;  // domeRamping- the lower this number the longer R2's dome will take to speedup or slow down,
-                       // change this by incriments of 1                                     
+byte turnspeed = 70;  // the higher this number the faster it will spin in place, lower - easier to control. 
+                      // Recommend beginner: 40 to 50, experienced: 50 $ up, I like 75   
+                                         
+byte domespeed = 127; // If using a speed controller for the dome, sets the top speed
+                      // Use a number up to 127 for serial                       
+                      
+byte ramping = 5;     // Ramping- the lower this number the longer R2 will take to speedup or slow down,
+                      // change this by incriments of 1               
+                          
+byte domeRamping = 1; // domeRamping- the lower this number the longer R2's dome will take to speedup or slow down,
+                      // change this by incriments of 1                                     
 
 byte domecompensation = 10;  // For controllers that centering problems, causing slight dome drift in one direction
+
 byte drivecompensation = 20; // use the lowest number with no drift
 
 int domeBaudeRate = 9600; // Set the baude rate for the Syren motor controller
                           // for packetized options are: 2400, 9600, 19200 and 38400
                           // for simple use 9600
                           
-//#define SYRENSIMPLE   // Comment out for packetized serial connection to Syren - Recomended
-                        // Un-comment for simple serial - do not use in close contact with people.
+//#define SYRENSIMPLE // Comment out for packetized serial connection to Syren - Recomended
+                      // Un-comment for simple serial - do not use in close contact with people.
                         
-                 
-
-///////include libs and declare variables////////////////////////////
+                                           
+// =================== INCLUDE LIBS AND DECLARE VARIABLES===================================
 
 /*   For Arduino 1.0 and newer, do this:   */
 #include <SoftwareSerial.h>
@@ -94,15 +98,18 @@ SoftwareSerial MP3Serial2(8, 6);  // SoftwareSerial port assignments (RX, TX) to
 #include <SyRenSimplified.h>
 #include <PS2X_lib.h>  //for v1.7
 #include <Servo.h> 
+#include <SoftEasyTransfer.h>
+
+int mp3BaudeRate = 9600; // Set the baude rate for the BY8x01-16P sound module
 
 //#if (AUDIO1==1 || AUDIO2==1)
-  //settings for BY8x01-16P module...
-  #include <MP3Trigger.h>
+//settings for Sparkfun MP3 module...
+#include <MP3Trigger.h>
 //#endif
 
 //#if (AUDIO1==2 || AUDIO2==2)
-  //settings for BY8x01-16P module...
- #include <BY8x0116Pv2.h>
+//settings for BY8x01-16P module...
+#include <BY8x0116Pv2.h>
 //#endif
 
 //#include <MP3Trigger.h>
@@ -111,13 +118,12 @@ SoftwareSerial MP3Serial2(8, 6);  // SoftwareSerial port assignments (RX, TX) to
 //int resetPin = 2;  // The pin number of the reset pin.
 
 
-//int clockPin = A1;  // The pin number of the clock pin.
-//int dataPin = A2;  // The pin number of the data pin.
-int busyPin = A0;  // The pin number of the busy pin on BY8x01-16P module 1
-//int clockPin2 = 6;  // The pin number of the clock pin.
-//int dataPin2 = 9;  // The pin number of the data pin.
-int busyPin2 = 2;  // The pin number of the busy pin on BY8x01-16P module 2
-
+//int clockPin = A1;  // The pin number of the clock pin on WTV020 #1
+//int dataPin = A2;  // The pin number of the data pin WTV020 #1
+int busyPin = A0;  // The pin number of the busy pin on BY8x01-16P #1
+//int clockPin2 = 6;  // The pin number of the clock pin on WTV020 #2
+//int dataPin2 = 9;  // The pin number of the data pin on WTV020 #2
+int busyPin2 = 2;  // The pin number of the busy pin on BY8x01-16P #2
 
 
 //#if (AUDIO1==2)
@@ -125,14 +131,12 @@ BY8x0116Pv2 BY8(MP3Serial1);
 //#else
 MP3Trigger trigger;
 //#endif
-#include <SoftEasyTransfer.h>
 
 //#if (AUDIO2==2)
 BY8x0116Pv2 BY82(MP3Serial2);
 //#endif
+
 //////////////////////////////////////////////////////////////////
-
-
 Sabertooth ST(128, STSerial);
 #if defined(SYRENSIMPLE)
 SyRenSimplified SyR(SyRSerial); // Use SWSerial as the serial port.
@@ -157,9 +161,13 @@ PS2X ps2x; // create PS2 Controller Class
 int error = 0; // part of the ps2x lib
 byte type = 0; // part of the ps2x lib
 byte vibrate = 0; // part of the ps2x lib
-byte BY8Vol = 6; // 7 = full volume, 0 off
+
+byte BY8Vol = 25; // 30 = full volume, 0 off
+
 byte trigVol = 30;
-byte BY8Vol2 = 5; // 7 = full volume, 0 off
+
+byte BY8Vol2 = 22; // 30 = full volume, 0 off
+
 byte trigVol2 = 30;
 byte drive = 0; // 0 = drive motors off ( right stick disabled )
 byte automate = 0;
@@ -178,17 +186,27 @@ boolean jukeBox = 0;
 long jbMillis = 0;
 unsigned long timer[1];
 byte timerState[1];
-//////////////set up run once//////////////////////////////////////////
+
+
+// ================= SETUP AND RUN ONCE =====================================================
 
 void setup(){
   SyRSerial.begin(domeBaudeRate);
+  MP3Serial1.begin(mp3BaudeRate);
+  MP3Serial2.begin(mp3BaudeRate);
+    
+  //BY8.init(busyPin);  // Init the player with the MP3 BUSY pin connected to Arduino pin defined
+  //BY82.init(busyPin2);  // Init the player with the MP3 BUSY pin connected to Arduino pin defined
+  
   BY82.setVolume(BY8Vol2);
   BY8.setVolume(BY8Vol);
+    
   #if defined(SYRENSIMPLE)
   SyR.motor(0);            
   #else
   SyR.autobaud(); 
   #endif 
+    
   STSerial.begin(9600);   // 9600 is the default baud rate for Sabertooth packet serial.
   ST.autobaud();          // Send the autobaud command to the Sabertooth controller(s).
                           // NOTE: *Not all* Sabertooth controllers need this command.
@@ -199,9 +217,11 @@ void setup(){
                           //       If you have a 2x12, 2x25 V2, 2x60 or SyRen 50, you can remove
                           //       the autobaud line and save yourself two seconds of startup delay.
   ST.setTimeout(950);
+    
   #if !defined(SYRENSIMPLE)
   SyR.setTimeout(950);
   #endif
+    
   ST.setDeadband(drivecompensation);
   ST.drive(0); // The Sabertooth won't act on mixed mode packet serial commands until
   ST.turn(0);  // it has received power levels for BOTH throttle and turning, since it
@@ -217,14 +237,15 @@ while(attempts<25) { //loop around until a PS2 controller is found or we've atte
  
  trigger.setVolume(trigVol);//anything with trigger. is for the mp3trigger
  type = ps2x.readType();
+    
  domeSerial.begin(57600);//start the library, pass in the data details and the name of the serial port.
  ET.begin(details(domeData), &domeSerial);
+    
  BY82.setVolume(BY8Vol2);//Yes, this is a repeat, but somtimes the first one doesn't take :p
  BY8.setVolume(BY8Vol);
  }
  
- /////////////////////////////////////////////////////////////////
- ///////functions to play sound or music////////////////
+ // ============== FUNCTIONS TO PLAY SOUND OR MUSIC ==========================================
 void playSound(int soundNumber) {
   if (AUDIO1 == 1)
     trigger.trigger(soundNumber);
@@ -243,9 +264,9 @@ void playMusic(int musicNumber) {
   //endif 
 }
 
-void setVol1(byte wtvVol1, byte trigVol1) {
+void setVol1(byte BY8Vol1, byte trigVol1) {
   if (AUDIO1 == 2)
-     BY8.setVolume(wtvVol1);
+     BY8.setVolume(BY8Vol1);
    else
      trigger.setVolume(trigVol1);}
      
@@ -255,9 +276,8 @@ void setVol2(byte  BY8Vol2, byte trigVol2) {
    else
      trigger.setVolume(trigVol2);}     
 
-//////////////////////////////////////////////////////////////////
-//delay without delay
-//////////////////////////////////////////////////////////////
+
+// ================ DELAY WITHOUT DELAY =======================================================
 int delayMilliSeconds(int timerNumber,unsigned long delaytime){
   unsigned long timeTaken;
   if (timerState[timerNumber]==0){    //If the timer has been reset (which means timer (state ==0) then save millis() to the same number timer, 
@@ -279,10 +299,8 @@ int delayMilliSeconds(int timerNumber,unsigned long delaytime){
   }
 }
 
- 
- ///////Loop run over and over//////////////////////////////////////
- //////////////////////////////////////////////////////////////////
 
+// ================== LOOP RUN OVER AND OVER =================================================
 void loop(){
     
  if(error == 1) //skip loop if no controller found
@@ -297,15 +315,16 @@ void loop(){
   return; 
  }
   ps2x.read_gamepad();   //read controller and set large motor to spin at 'vibrate' speed
- 
- //// enable / disable right stick & play sound 
+
+
+// =================== ENABLE / DISABLE RIGHT STICK & PLAY SOUND =============================
  if(ps2x.ButtonPressed(PSB_START)) 
 {if (drive<1)
     {drive = 1; playSound(52);}
  else {drive = 0; playSound(53);}
 }
 
- ////turn hp automation or automate on & off      
+// ================== TURN HP AUTOMATION OR AUTOMATE ON & OFF ================================
  if(ps2x.ButtonPressed(PSB_SELECT))
   {if(ps2x.Button(PSB_R2))
    {if(domeData.hpa == 1)
@@ -320,7 +339,8 @@ else
 else {automate = 0; action = 0; playSound(53);}
 }}
 
-/////////////automate
+    
+// ==================== AUTOMATE =============================================================
 if (automate == 1)
 { if (ps2x.Analog(PSS_LX)!=128)
   { automateMillis = millis();}
@@ -357,14 +377,16 @@ if (automate == 1)
   
   automateDelay = random(3,10);// set this to min and max seconds between sounds
 }}}
-////volume controll
+
+
+// ================= VOLUME CONTROL ==========================================================
  if(ps2x.ButtonPressed(PSB_PAD_UP)) 
  {
   if(ps2x.Button(PSB_R1))
-   { if (BY8Vol<7)
+   { if (BY8Vol<30)
    {BY8Vol++;
     trigVol-=15;
-    setVol1(BY8Vol,trigVol);}// volume up
+    setVol1(BY8Vol,trigVol);} //volume up
    }  
  }
   if(ps2x.ButtonPressed(PSB_PAD_DOWN)) 
@@ -373,16 +395,16 @@ if (automate == 1)
    { if (BY8Vol>0)
    {BY8Vol--;
     trigVol+=15;
-    setVol1(BY8Vol, trigVol);}// volume down   
+    setVol1(BY8Vol, trigVol);} //volume down   
    } 
  }
  if(ps2x.ButtonPressed(PSB_PAD_RIGHT)) 
  {
   if(ps2x.Button(PSB_R1))
-   { if (BY8Vol2<7)
+   { if (BY8Vol2<30)
    {BY8Vol2++;
     trigVol2-=15;
-   setVol2(BY8Vol2, trigVol2);}// volume up
+   setVol2(BY8Vol2, trigVol2);} //volume up
    }  
  }
   if(ps2x.ButtonPressed(PSB_PAD_LEFT)) 
@@ -391,11 +413,12 @@ if (automate == 1)
    { if (BY8Vol2>0)
    {BY8Vol2--;
     trigVol2+=15;
-   setVol2(BY8Vol2, trigVol2);}// volume down   
+   setVol2(BY8Vol2, trigVol2);} //volume down   
    } 
  }
  
- ////Stop all sounds and music
+    
+// ================== STOP ALL SOUNDS AND MUSIC ==============================================
  if(ps2x.Button(PSB_R1)&&ps2x.Button(PSB_R2)&&ps2x.Button(PSB_L1)&&ps2x.Button(PSB_L2))
  {
    if (AUDIO1 == 2)
@@ -408,7 +431,8 @@ if (automate == 1)
      {trigger.stop(); domeData.dsp = 0; ET.sendData();}
  }
  
- ////Logic display brightness
+    
+// =================== LOGIC DISPLAY BRIGHTNESS ==============================================
  if(ps2x.ButtonPressed(PSB_PAD_UP)) 
  {
   if(ps2x.Button(PSB_L1))
@@ -425,7 +449,7 @@ if (automate == 1)
  }
  
  
- /////hp movement
+// ==================== HP MOVEMENT ============================================================
 if(ps2x.ButtonPressed(PSB_PAD_UP))
 {if (!((ps2x.Button(PSB_R1))||(ps2x.Button(PSB_L1))))
  {
@@ -451,7 +475,7 @@ if(ps2x.ButtonPressed(PSB_PAD_UP))
  {domeData.hpx = 0; domeData.dsp = 100; ET.sendData();}
  
  
- /////play sounds and change display
+// ================= PLAY SOUNDS AND CHANGE DISPLAY ==========================================
   if(ps2x.ButtonPressed(PSB_GREEN))//triangle top
    {if(ps2x.Button(PSB_L1))
       {(playSound(8));}
@@ -490,7 +514,7 @@ if(ps2x.ButtonPressed(PSB_PAD_UP))
       {(playSound(random(25,32)));}}
       
 
- ////turn hp light on & off  or change sound system  or turn jukebox on / off  
+// ========= turn hp light on & off  or change sound system  or turn jukebox on / off ======= 
   if(ps2x.ButtonPressed(PSB_L3)) //left joystick
 {if(ps2x.Button(PSB_R1))
    {
@@ -520,7 +544,8 @@ if(ps2x.ButtonPressed(PSB_PAD_UP))
   }   
 }
 
-///////////jukeBox
+
+// ==================== JUKEBOX ==============================================================
 if (jukeBox ==1)
 {
   if (AUDIO2 == 2 || (AUDIO2 == 0 && AUDIO1 == 2))
@@ -549,7 +574,8 @@ unsigned long currentMillis = millis();
   }
 }*/
 }
- ////Change drivespeed
+
+// ================= CHANGE DRIVESPEED ======================================================
 if(ps2x.ButtonPressed(PSB_R3)) //right joystick
 {
 if(drivespeed == drivespeed1)//if in lowest speed
@@ -559,8 +585,9 @@ else if(drivespeed == drivespeed2 && (drivespeed3!=0))//if in medium speed
 else////////////////////////////////////////we must be in high speed
 {drivespeed = drivespeed1; playSound(52);domeData.dsp = 21; ET.sendData(); domeData.dsp = 0;}//change to low speed and play sound 2-tone
 } 
+
    
- /////foot drives 
+// ================== FOOT DRIVES ============================================================
 /////////////////new stuff//////////////////
 sticknum = (map(ps2x.Analog(PSS_RY), 0, 255, -drivespeed, drivespeed));
   
@@ -592,14 +619,15 @@ sticknum = (map(ps2x.Analog(PSS_RY), 0, 255, -drivespeed, drivespeed));
   turnnum = (map(ps2x.Analog(PSS_RX), 0, 53, -turnspeed, -(turnspeed/3))); 
 
 ////////////////////////////////// 
-  if (drive == 1)// right stick (drive)
+  if (drive == 1) //right stick (drive)
 {  
   ST.turn(turnnum);
   ST.drive(drivenum);
 }
 
-/////dome drive
-if (timerState[0]==0)// Dome is not turning automatically
+    
+// ================== DOME DRIVE ===================================================
+if (timerState[0]==0) //Dome is not turning automatically
 {
 domeSticknum = (map(ps2x.Analog(PSS_LX), 0, 255, -domespeed, domespeed));
 if (domeSticknum > -domecompensation && domeSticknum < domecompensation)
